@@ -1,176 +1,600 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harryb.art</title>
+<link rel="icon" type="image/x-icon" href="/images/Hbfav.ico">
+<style>
 
-<html>
-	<head>
-		<title>Harry</title>
-		<link rel="icon" type="image/x-icon" href="/images/Hbfav.ico">
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-	</head>
-	<body class="is-preload">
+body{margin:0;font-family:monospace;background:#000;height:100vh;overflow:hidden;display:flex;justify-content:center;align-items:center;image-rendering:pixelated}
+.monitor-frame{border:45px solid #2c2c2c; border-radius:10px; width:97%; height:95%; box-sizing:border-box; display:flex; flex-direction:column; position:relative; background:#008080; overflow:hidden;}
+.desktop{position:relative;flex:1;width:100%;height:100%; display:flex; flex-direction:column;}
+.icon{width:80px;text-align:center;color:white;margin:20px;cursor:pointer;position:absolute;user-select:none;}
+.icon img{width:48px;height:48px;display:block;margin:auto}
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+.window{position:absolute;top:120px;left:80px;width:500px;height:400px;background:#c0c0c0;border:2px solid #000;display:none;z-index:1;resize:both;overflow:hidden;}
+.window::-webkit-resizer{display:none}
 
-				<!-- Main -->
-					<div id="main">
-						<div class="inner">
+.titlebar{background:#000080;color:white;padding:4px;font-size:14px;cursor:move;display:flex;justify-content:space-between;align-items:center;user-select:none}
 
-							<!-- Banner -->
-								<section id="banner">
-									<div class="content">
+/* Windows 95 inset panel */
+.win95-panel{background:white;border-top:2px solid #fff;border-left:2px solid #fff;border-right:2px solid #404040;border-bottom:2px solid #404040;padding:8px}
+.titlebar .controls{display:flex;gap:2px}
+.titlebar .controls div{width:16px;height:16px;background:#c0c0c0;border:1px solid #000;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;font-weight:bold}
 
-										<h1>HARRY</h1> <br>
-											<h1>&nbsp;</h1>
-											<a>3D generalist</a>
-										
-										
-									</div>
-							
-								</section>
+.content{padding:10px;background:#c0c0c0;color:black;height:calc(100% - 30px);overflow:auto;scrollbar-width:auto;scrollbar-color:#000080 #c0c0c0}
 
-							<!-- Section -->
-								<section id="about">
+/* custom scrollbar so default one does not appear */
+.content::-webkit-scrollbar{width:12px}
+.content::-webkit-scrollbar-track{background:#c0c0c0;border:1px solid #000}
+.content::-webkit-scrollbar-thumb{background:#000080;border:1px solid #000}
+.content::-webkit-scrollbar-button{display:none}
 
-									<div class="features">
-										<article>
-											<div class="content">
-												<h2 id="about1">about</h2>
-											
-											</div>
-										</article>
-										<article>
-											
-											<div class="content">
-												<p>I’m a 3D Generalist specialising in Unreal Engine - creating cinematic experiences for both real-time and pre-rendered pipelines.<br>
-<br>
+.taskbar{position:absolute;bottom:0;left:0;width:100%;background:#c0c0c0;border-top:2px solid #000;height:32px;display:flex;align-items:center;justify-content:space-between;z-index:1000;padding:0 8px;box-sizing:border-box}
+.taskbar button{margin:0 2px;padding:2px 6px;background:#c0c0c0;border:1px solid #000;cursor:pointer;font-family:monospace}
+
+.start{background:#c0c0c0;border:2px solid #000;padding:2px 10px;margin:2px;cursor:pointer;position:absolute;bottom:0;left:0;z-index:1002}
+.start-menu{display:none;position:absolute;bottom:32px;left:0;width:150px;background:#c0c0c0;border:2px solid #000;padding:5px;z-index:1002}
+.start-menu div{padding:4px;cursor:pointer}
+.start-menu div:hover{background:#000080;color:white}
+
+.datetime{cursor:pointer;font-size:12px;padding:2px 6px;border:2px inset #000;border-radius:2px}
+.popup{position:absolute;bottom:40px;right:8px;width:200px;background:#c0c0c0;border:2px solid #000;padding:8px;display:none;z-index:1003;font-size:12px}
+
+.gallery{display:flex;flex-wrap:wrap;gap:20px;justify-content:flex-start;background:white;padding:10px;border:2px inset #808080}
+.gallery .project-icon{width:auto;text-align:center;color:black;cursor:pointer;background:#e0e0e0;border:1px solid #000;padding:5px}
+.gallery .project-icon img{width:220px;height:220px;display:block;margin:auto}
+.gallery .project-title{font-weight:bold;margin-top:4px;text-align:center}
+
+/* project layout */
+.project-header{margin-bottom:12px}
+.project-header h2{font-size:5em;margin:0 0 6px 0}
+.project-header h3{font-size:2em;font-weight:bolder;}
+.project-about{font-size:23px;margin-bottom:16px}
+
+.project-gallery{display:flex;flex-direction:column;gap:16px}
+
+.aspect-16-9{width:70%;aspect-ratio:16/9;padding:2% 15% 0% 15%;display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:pointer}
+.aspect-16-9 img{width:100%;height:100%;object-fit:cover}
+
+/* image viewer */
+.image-viewer{position:absolute;top:0;left:0;width:100%;height:100%;background:#000;display:none;align-items:center;justify-content:center;z-index:5000}
+.image-viewer img{max-width:95%;max-height:95%}
+.viewer-close{position:absolute;top:10px;right:10px;background:#c0c0c0;border:2px solid #000;padding:4px 8px;cursor:pointer}
+
+/* floppy loader */
+.floppy-loader{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:10px;font-size:13px}
+.floppy{width:80px;height:80px;background:#111;border:3px solid #000;position:relative}
+.floppy:before{content:'';position:absolute;top:10px;left:10px;width:60px;height:20px;background:#444}
+.loading-bar{width:200px;height:10px;border:2px solid #000;background:#fff}
+.loading-bar div{height:100%;width:0;background:#000}
+
+.folder-nav{font-size:20px;margin-bottom:10px;color:#000080;cursor:pointer}
+
+
+
+/* desktop selection box */
+.selection-box{position:absolute;border:1px dashed #000;background:rgba(0,0,255,0.15);pointer-events:none;display:none}
+
+</style>
+</head>
+<body>
+
+<div class="monitor-frame">
+<div class="desktop" id="desktop">
+
+<!-- SINGLE CLICK icons -->
+<div class="icon" style="top:30px; left:20px;" onclick="openWindow('about')">
+<img src="https://cdn-icons-png.flaticon.com/512/716/716784.png">
+<div>About Me</div>
+</div>
+
+<div class="icon" style="top:20px; left:120px;" onclick="openWindow('art')">
+<img src="https://cdn-icons-png.flaticon.com/512/716/716784.png">
+<div>Cinematic Work</div>
+</div>
+
+<div class="icon" style="top:24px; left:220px;" onclick="openWindow('projects')">
+<img src="https://cdn-icons-png.flaticon.com/512/716/716784.png">
+<div>Other Work</div>
+</div>
+
+<!-- WINDOW sizes defined with data attributes -->
+<div id="about" class="window" data-width="420" data-height="420">
+<div class="titlebar">About Me <div class="controls"><div onclick="minimizeWindow('about')">_</div><div onclick="toggleFullscreen('about')">□</div><div onclick="closeWindow('about')">×</div></div></div>
+<div class="content"><p>I’m a 3D Generalist specialising in Unreal Engine - creating cinematic experiences for both real-time and pre-rendered pipelines.<br>
+<br></br>
 I’m a multidisciplinary artist with experience working across game and television productions, cinematics, asset creation and on-set support in both pre/post-vis. While my core focus is 3D and Unreal Engine, my broader creative background includes UI design, 2D artwork, illustration, and creative design.<br>
-<br>
-My background as a generalist allows me to move comfortably between environment creation, cinematic layout, lighting, and technical setup, while keeping a strong focus on storytelling and visual clarity.
-</p>
-											</div>
-										</article>
-									
-									</div>
-								</section>
+<br></br>
+My background as a generalist allows me to move comfortably between environment creation, cinematic layout, lighting, and technical setup, while keeping a strong focus on storytelling and visual clarity.</p>
 
-							<!-- cinematic work -->
-								<section id="cinematicwork">
-									<div class="features">
-										<article>
-											<div class="content">
-												<h2>cinematic work</h2>
-											
-											</div>
-										</article>
-										<article>
-											
-											<div class="content">
-												<p>My 3D work focuses on cinematics, pre/post-vis, and virtual production using Unreal Engine. I’ve worked across game and television projects creating cinematic sequences, shot layouts, environments, and on-set support to help teams explore and refine visual storytelling and vfx before production.</p>
-											</div>
-										</article>
-									
-									</div>
-									<div class="posts">
-										<article>
-											<a href="#" class="image"><img src="images/everwild/unreal/rare_logo.png" alt="" /></a>
-											<h3>Everwild (ue4)</h3>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="images/everwild/vray/everwild_cover.png" alt="" /></a>
-											<h3>Everwild (vray)</h3>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="images/outriders/1920/outriders_cover.png" alt="" /></a>
-											<h3>Outriders</h3>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="images/SOT/1920/sot_cover.png" alt="" /></a>
-											<h3>Sea Of Thieves</h3>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="images\CM1f25\25\1920\cmf125_cover.png" alt="" /></a>
-											<h3>F125</h3>
-										</article>
-									</div>
-								</section>
-							<!-- other work -->
-								<section id="otherwork">
-									<div class="features">
-										<article>
-											<div class="content">
-												<h2>other work</h2>
-											
-											</div>
-										</article>
-										<article>
-											
-											<div class="content">
-												<p>Alongside my 3D work, I also create UI design, 2D artwork, illustration, and digital design. This side of my work focuses on visual communication, layout, and user experience across interfaces, web design, and creative projects. It complements my real-time work by bringing a strong design sensibility to both tools and visuals.</p>
-											</div>
-										</article>
-									
-									</div>
-								  <div class="posts">
-									  <article>
-											<a href="#" class="image"><img src="images\na.png" alt="" /></a>
-											<h3>Arctic scene (ue)</h3>
-										</article>
-									  <article>
-											<a href="#" class="image"><img src="images\lockerbie\lockerbie_cover.png" alt="" /></a>
-											<h3>Lockerbie</h3>
-										</article>
-									  <article>
-										  <a href="#" class="image"><img src="images\na.png" alt="" /></a>
-										  <h3>GGVA</h3>
-									  </article>
-									  <article>
-										  <a href="#" class="image"><img src="images\vpa\321.png" alt="" /></a>
-									    <h3>iOS Virtual Camera</h3>
-									  </article>
-										<article>
-											<a href="#" class="image"><img src="images\na.png" alt="" /></a>
-											<h3>P31 Configurator</h3>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="images\na.png" alt="" /></a>
-											<h3>Novairo rebrand</h3>
-										</article>
-									  <article>
-											<a href="#" class="image"><img src="images\na.png" alt="" /></a>
-											<h3>UKRI Illustration</h3>
-										</article>
-									</div>
-								</section>
 
-						</div>
-					</div>
+</div>
+</div>
 
-				<!-- Sidebar -->
-					<div id="sidebar">
-						<div class="inner">
-							<!-- Menu -->
-								<nav id="menu">								
-									<ul>
-										<li><a href="#about">about</a></li>
-										<li><a href="#cinematicwork">cinematic work</a></li>
-										<li><a href="#otherwork">other work</a></li>
-										<li><a href="#contact">contact</a></li>
-									</ul>
-								</nav>
+<div id="art" class="window" data-width="800" data-height="680">
+<div class="titlebar">Cinematic Work <div class="controls"><div onclick="minimizeWindow('art')">_</div><div onclick="toggleFullscreen('art')">□</div><div onclick="closeWindow('art')">×</div></div></div>
+<div class="content">
+<div class="win95-panel"><div class="gallery" style="justify-content:flex-start">
+<div class="project-icon" onclick="openWindow('3d1')"><img src="https://harryb.art/images/SOT/1920/sot_cover.png"><div class="project-title">Sea Of Thieves</div></div>
+<div class="project-icon" onclick="openWindow('3d2')"><img src="https://harryb.art/images/outriders/1920/outriders_cover.png"><div class="project-title">Outriders</div></div>
+<div class="project-icon" onclick="openWindow('3d3')"><img src="https://harryb.art/images/CM1f25/25/1920/cmf125_cover.png"><div class="project-title">F125</div></div>
+<div class="project-icon" onclick="openWindow('3d4')"><img src="https://harryb.art/images/everwild/unreal/rare_logo.png"><div class="project-title">Everwild (ue4)</div></div>
+<div class="project-icon" onclick="openWindow('3d5')"><img src="https://harryb.art/images/everwild/vray/everwild_cover.png"><div class="project-title">Everwild (vray)</div></div>
 
-						</div>
-					</div>
+</div>
+</div>
+<p>My 3D work focuses on cinematics, pre/post-vis, and virtual production using Unreal Engine. I’ve worked across game and television projects creating cinematic sequences, shot layouts, environments, and on-set support to help teams explore and refine visual storytelling and vfx before production.</p>
+</div>
+</div>
 
-			</div>
+<div id="projects" class="window" data-width="1100" data-height="680">
+<div class="titlebar">Other Work <div class="controls"><div onclick="minimizeWindow('projects')">_</div><div onclick="toggleFullscreen('projects')">□</div><div onclick="closeWindow('projects')">×</div></div></div>
+<div class="content">
+<div class="win95-panel"><div class="gallery" style="justify-content:flex-start">
+<div class="project-icon" onclick="openWindow('p1')"><img src="https://harryb.art/images/na.png"><div class="project-title">Arctic scene (ue)</div></div>
+<div class="project-icon" onclick="openWindow('p2')"><img src="https://harryb.art/images/lockerbie/lockerbie_cover.png"><div class="project-title">Lockerbie</div></div>
+<div class="project-icon" onclick="openWindow('p3')"><img src="https://harryb.art/images/na.png"><div class="project-title">GGVA</div></div>
+<div class="project-icon" onclick="openWindow('p4')"><img src="https://harryb.art/images/vpa/321.png"><div class="project-title">iOS Virtual Camera</div></div>
+<div class="project-icon" onclick="openWindow('p5')"><img src="https://harryb.art/images/na.png"><div class="project-title">P31 Configurator</div></div>
+<div class="project-icon" onclick="openWindow('p6')"><img src="https://harryb.art/images/na.png"><div class="project-title">Novairo rebrand</div></div>
+<div class="project-icon" onclick="openWindow('p7')"><img src="https://harryb.art/images/na.png"><div class="project-title">UKRI Illustration</div></div>
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+</div>
+</div>
+<p>Alongside my 3D work, I also create UI design, 2D artwork, illustration, and digital design. This side of my work focuses on visual communication, layout, and user experience across interfaces, web design, and creative projects. It complements my real-time work by bringing a strong design sensibility to both tools and visuals.</p>
+</div>
+</div>
 
-	</body>
+<!-- PROJECT WINDOWS -->
+<!-- cinematic work -->
+<div id="3d1" class="window" data-width="900" data-height="600" data-startfullscreen="true">
+<div class="titlebar">3D Project 1 <div class="controls"><div onclick="minimizeWindow('3d1')">_</div><div onclick="toggleFullscreen('3d1')">□</div><div onclick="closeWindow('3d1')">×</div></div></div>
+<div class="content project-window">
+<div class="floppy-loader"><div class="floppy"></div><div>Loading project from floppy disk...</div><div class="loading-bar"><div></div></div></div>
+<div class="project-body" style="display:none">
+<div class="folder-nav" onclick="closeWindow(this.closest('.window').id)">← Cinematic Work</div>
+<div class="project-header"><h2>Sea Of Thieves</h2>
+  
+
+<h3>Cinematic Trailers</h3>
+</div>
+<br></br>
+<div class="project-about">
+Unreal engine 4/ Scene Dev/ Lighting/ VFX
+<br></br>
+2018-2024
+<br></br>
+Working closely with rare over the years I've worked on all of their in engine cinematic trailers for SOT. From pre-vis to final frames working on scene and look dev/ Lighting/ in-engine VFX.
+</div>
+<div class="project-gallery">
+
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://static.wixstatic.com/media/c67c85_98588b15077a4e12914a2f03078b580e~mv2.png/v1/fill/w_1361,h_764,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/c67c85_98588b15077a4e12914a2f03078b580e~mv2.png"></div>
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://static.wixstatic.com/media/c67c85_999dad670f7e461faddae2a20a94ec7c~mv2.png/v1/fill/w_1356,h_762,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/c67c85_56b8fc1007964cc5b6c1f11ee0ad85dc~mv2.png"></div>
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://static.wixstatic.com/media/c67c85_0e4328c023574b939286e6c8c8e53f37~mv2.png/v1/fill/w_1362,h_766,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/c67c85_0e4328c023574b939286e6c8c8e53f37~mv2.png"></div>
+</div>
+</div>
+</div>
+</div>
+<!------>
+<div id="3d2" class="window" data-width="900" data-height="600" data-startfullscreen="true">
+<div class="titlebar">3D Project 1 <div class="controls"><div onclick="minimizeWindow('3d2')">_</div><div onclick="toggleFullscreen('3d2')">□</div><div onclick="closeWindow('3d2')">×</div></div></div>
+<div class="content project-window">
+<div class="floppy-loader"><div class="floppy"></div><div>Loading project from floppy disk...</div><div class="loading-bar"><div></div></div></div>
+<div class="project-body" style="display:none">
+<div class="folder-nav" onclick="closeWindow(this.closest('.window').id)">← Cinematic Work</div>
+<div class="project-header"><h2>Outriders / People Can Fly</h2>
+  
+
+<h3>Cinematic intro (realtime)</h3>
+</div>
+<br></br>
+<div class="project-about">
+Unreal Engine 4/ Scene Dev/ Look Dev/ Lighting
+<br></br>
+2019
+<br></br>
+This was the first AAA game i got to contribute to - working with a small team to produce the opening cinematic for the game.
+</div>
+<div class="project-gallery">
+
+<div class="aspect-16-9" onclick="openImage(this)"><img src=""></div>
+
+</div>
+</div>
+</div>
+</div>
+<!------>
+<div id="3d3" class="window" data-width="900" data-height="600" data-startfullscreen="true">
+<div class="titlebar">3D Project 1 <div class="controls"><div onclick="minimizeWindow('3d3')">_</div><div onclick="toggleFullscreen('3d3')">□</div><div onclick="closeWindow('3d3')">×</div></div></div>
+<div class="content project-window">
+<div class="floppy-loader"><div class="floppy"></div><div>Loading project from floppy disk...</div><div class="loading-bar"><div></div></div></div>
+<div class="project-body" style="display:none">
+<div class="folder-nav" onclick="closeWindow(this.closest('.window').id)">← Cinematic Work</div>
+<div class="project-header"><h2>F1 2025 / Codemasters</h2>
+  
+
+<h3>Cinematic Cut-scenes</h3>
+</div>
+<br></br>
+<div class="project-about">
+Unreal Engine 5/ Scene Dev/ Look Dev/ Lighting
+<br></br>
+2024/25
+<br></br>
+F125 in engine pre rendered cut-scenes in path-tracer. Over 90 minutes of cut-scenes of which I was responsible for 20. Taking the shots from previs to final frames. Handling in engine rendering and alembic solves.
+</div>
+<div class="project-gallery">
+
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://static.wixstatic.com/media/c67c85_5b0fe1e3742c42548d7f1ff42c41a270~mv2.png/v1/fill/w_1232,h_693,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/c67c85_5b0fe1e3742c42548d7f1ff42c41a270~mv2.png"></div>
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://static.wixstatic.com/media/c67c85_f49551e91758463cb8ece6ab694704be~mv2.png/v1/fill/w_1232,h_692,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/39.png"></div>
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://static.wixstatic.com/media/c67c85_0a89e08b014f4c32a6f996c255a6f50c~mv2.png/v1/fill/w_1231,h_692,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/38.png"></div>
+
+</div>
+</div>
+</div>
+</div>
+<!------>
+<div id="3d4" class="window" data-width="900" data-height="600" data-startfullscreen="true">
+<div class="titlebar">3D Project 1 <div class="controls"><div onclick="minimizeWindow('3d4')">_</div><div onclick="toggleFullscreen('3d4')">□</div><div onclick="closeWindow('3d4')">×</div></div></div>
+<div class="content project-window">
+<div class="floppy-loader"><div class="floppy"></div><div>Loading project from floppy disk...</div><div class="loading-bar"><div></div></div></div>
+<div class="project-body" style="display:none">
+<div class="folder-nav" onclick="closeWindow(this.closest('.window').id)">← Cinematic Work</div>
+<div class="project-header"><h2>Everwild (ue4) / Rare</h2>
+  
+
+<h3>Cinematic Trailer (ue4)</h3>
+</div>
+<br></br>
+<div class="project-about">
+Unreal engine 4/ Scene Dev/ Lighting/ VFX
+<br></br>
+2019
+<br></br>
+I had the unique opportunity to work on a (now cancelled) RARE project in 2019&2020 in both the in-engine announcement trailer and the pre-rendered vray cinemtaic.
+</div>
+<div class="project-gallery">
+
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/everwild/unreal/Shot_010.0381.png"></div>
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/everwild/unreal/Shot_030.0212.png"></div>
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/everwild/unreal/Shot_040.0074.png"></div>
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/everwild/unreal/Shot_050.0265.png"></div>
+
+</div>
+</div>
+</div>
+</div>
+<!------>
+<div id="3d5" class="window" data-width="900" data-height="600" data-startfullscreen="true">
+<div class="titlebar">3D Project 1 <div class="controls"><div onclick="minimizeWindow('3d5')">_</div><div onclick="toggleFullscreen('3d5')">□</div><div onclick="closeWindow('3d5')">×</div></div></div>
+<div class="content project-window">
+<div class="floppy-loader"><div class="floppy"></div><div>Loading project from floppy disk...</div><div class="loading-bar"><div></div></div></div>
+<div class="project-body" style="display:none">
+<div class="folder-nav" onclick="closeWindow(this.closest('.window').id)">← Cinematic Work</div>
+<div class="project-header"><h2>Everwild (vray) / Rare</h2>
+  
+
+<h3>Cinematic Trailer (ue4)</h3>
+</div>
+<br></br>
+<div class="project-about">
+3d modelling/texturing/ look dev
+<br></br>
+2020
+<br></br>
+I had the unique opportunity to work on a (now cancelled) RARE project in 2019&2020 in both the in-engine announcement trailer and the pre-rendered vray cinemtaic.
+</div>
+<div class="project-gallery">
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/WSWnnQMSPjc?si=tHTIogPX37lBDiC-&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
+</div>
+</div>
+</div>
+</div>
+<!------>
+<!--END cinematic work -->
+<!-- other work -->
+<!------>
+<div id="p2" class="window" data-width="900" data-height="600" data-startfullscreen="true">
+<div class="titlebar">3D Project 1 <div class="controls"><div onclick="minimizeWindow('p2')">_</div><div onclick="toggleFullscreen('p2')">□</div><div onclick="closeWindow('p2')">×</div></div></div>
+<div class="content project-window">
+<div class="floppy-loader"><div class="floppy"></div><div>Loading project from floppy disk...</div><div class="loading-bar"><div></div></div></div>
+<div class="project-body" style="display:none">
+<div class="folder-nav" onclick="closeWindow(this.closest('.window').id)">← Other Work</div>
+<div class="project-header"><h2>Lockerbie</h2>
+  
+
+<h3>On set support & post-vis</h3>
+</div>
+<br></br>
+<div class="project-about">
+Unreal Engine 5/ post-vis
+<br></br>
+2024
+<br></br>
+Provided on set VFX support through the use of virtual production tools & VFX post-vis through ue5 for rapid shot turnaround.
+</div>
+<div class="project-gallery">
+
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/lockerbie/44.png"></div>
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/lockerbie/43.png"></div>
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/lockerbie/42.png"></div>
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/lockerbie/41.png"></div>
+
+</div>
+</div>
+</div>
+</div>
+
+<!--END other work -->
+
+<!-- TASKBAR -->
+<div class="taskbar" id="taskbar">
+<div id="taskbar-left" style="margin-left:70px"></div>
+<div class="datetime" id="datetime" onclick="togglePopup()"></div>
+</div>
+
+<div class="popup" id="copyrightPopup">© 2026 HarryB.art. All rights reserved. <br> </br>The contents contained in the images on this site are copyright of their respective owners - 
+  I do not claim ownership of the individual IP.</div>
+
+<div class="start" onclick="toggleStartMenu()">Start
+<div class="start-menu" id="startMenu">
+<div onclick="openWindow('about')">About Me</div>
+<div onclick="openWindow('art')">Cinematic Work</div>
+<div onclick="openWindow('projects')">Other Work</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<script>
+
+let zIndexCounter = 1
+let selectionBox
+let selectStartX=0
+let selectStartY=0
+const minimizedWindows = {}
+
+function openWindow(id){
+ const win=document.getElementById(id)
+ if(!win) return
+
+ if(!win.dataset.initialized){
+   const w=win.dataset.width
+   const h=win.dataset.height
+   if(w) win.style.width=w+'px'
+   if(h) win.style.height=h+'px'
+   win.dataset.initialized=true
+ }
+
+ win.style.display='block'
+ zIndexCounter++
+ win.style.zIndex=zIndexCounter
+
+ if(win.dataset.startfullscreen==='true' && win.dataset.fullscreen!=='true'){
+   toggleFullscreen(id)
+ }
+
+ restoreFromTaskbar(id)
+}
+
+function closeWindow(id){
+ const win=document.getElementById(id)
+ if(!win) return
+ win.style.display='none'
+ removeFromTaskbar(id)
+}
+
+function minimizeWindow(id){
+ const win=document.getElementById(id)
+ if(!win) return
+ win.style.display='none'
+ addToTaskbar(id)
+}
+
+function addToTaskbar(id){
+ if(minimizedWindows[id]) return
+ const bar=document.getElementById('taskbar-left')
+ const btn=document.createElement('button')
+ btn.textContent=document.getElementById(id).querySelector('.titlebar').textContent.replace(/[_×□]/g,'').trim()
+ btn.onclick=()=>openWindow(id)
+ bar.appendChild(btn)
+ minimizedWindows[id]=btn
+}
+
+function removeFromTaskbar(id){
+ const btn=minimizedWindows[id]
+ if(btn){btn.remove();delete minimizedWindows[id]}
+}
+
+function restoreFromTaskbar(id){removeFromTaskbar(id)}
+
+function toggleFullscreen(id){
+ const win=document.getElementById(id)
+ if(!win) return
+
+ if(win.dataset.fullscreen==='true'){
+  win.style.width=win.dataset.prevWidth
+  win.style.height=win.dataset.prevHeight
+  win.style.top=win.dataset.prevTop
+  win.style.left=win.dataset.prevLeft
+  win.dataset.fullscreen='false'
+ }else{
+  win.dataset.prevWidth=win.style.width
+  win.dataset.prevHeight=win.style.height
+  win.dataset.prevTop=win.style.top
+  win.dataset.prevLeft=win.style.left
+  win.style.width='100%'
+  win.style.height='calc(100% - 32px)'
+  win.style.top='0'
+  win.style.left='0'
+  win.dataset.fullscreen='true'
+ }
+}
+
+function toggleStartMenu(){
+ const menu=document.getElementById('startMenu')
+ menu.style.display=menu.style.display==='block'?'none':'block'
+}
+
+function openFullscreenProject(id){
+ document.querySelectorAll('.fullscreen-project').forEach(p=>p.style.display='none')
+ const project=document.getElementById(id)
+ if(project) project.style.display='block'
+}
+
+function closeFullscreenProject(id){
+ const project=document.getElementById(id)
+ if(project) project.style.display='none'
+}
+
+function updateDateTime(){
+ const now=new Date()
+ document.getElementById('datetime').textContent=now.toLocaleTimeString()
+}
+
+setInterval(updateDateTime,1000)
+updateDateTime()
+
+function togglePopup(){
+ const popup=document.getElementById('copyrightPopup')
+ popup.style.display=popup.style.display==='block'?'none':'block'
+}
+
+/* WINDOW DRAGGING + DOUBLE CLICK FULLSCREEN */
+
+document.querySelectorAll('.window').forEach(win=>{
+ const bar=win.querySelector('.titlebar')
+ let offsetX,offsetY,drag=false
+
+ bar.addEventListener('mousedown',e=>{
+  if(e.target.closest('.controls')) return
+  drag=true
+  offsetX=e.clientX-win.offsetLeft
+  offsetY=e.clientY-win.offsetTop
+  zIndexCounter++
+  win.style.zIndex=zIndexCounter
+ })
+
+ bar.addEventListener('dblclick',e=>{
+  if(e.target.closest('.controls')) return
+  toggleFullscreen(win.id)
+ })
+
+ document.addEventListener('mousemove',e=>{
+  if(!drag) return
+  win.style.left=(e.clientX-offsetX)+'px'
+  win.style.top=(e.clientY-offsetY)+'px'
+ })
+
+ document.addEventListener('mouseup',()=>drag=false)
+})
+
+
+function openImage(el){
+ const viewer=document.getElementById('viewer')
+ const img=viewer.querySelector('img')
+ img.src=el.querySelector('img').src
+ viewer.style.display='flex'
+}
+
+function closeViewer(){
+ document.getElementById('viewer').style.display='none'
+}
+
+
+
+/* DESKTOP SELECTION BOX */
+const desktop=document.getElementById('desktop')
+selectionBox=document.createElement('div')
+selectionBox.className='selection-box'
+desktop.appendChild(selectionBox)
+
+let selecting=false
+
+desktop.addEventListener('mousedown',e=>{
+ if(e.target!==desktop) return
+ selecting=true
+ selectStartX=e.offsetX
+ selectStartY=e.offsetY
+ selectionBox.style.left=selectStartX+'px'
+ selectionBox.style.top=selectStartY+'px'
+ selectionBox.style.width='0px'
+ selectionBox.style.height='0px'
+ selectionBox.style.display='block'
+})
+
+document.addEventListener('mousemove',e=>{
+ if(!selecting) return
+ const rect=desktop.getBoundingClientRect()
+ const x=e.clientX-rect.left
+ const y=e.clientY-rect.top
+
+ const w=x-selectStartX
+ const h=y-selectStartY
+
+ selectionBox.style.width=Math.abs(w)+'px'
+ selectionBox.style.height=Math.abs(h)+'px'
+ selectionBox.style.left=(w<0?x:selectStartX)+'px'
+ selectionBox.style.top=(h<0?y:selectStartY)+'px'
+})
+
+document.addEventListener('mouseup',()=>{
+ if(!selecting) return
+ selecting=false
+ selectionBox.style.display='none'
+})
+ document.querySelectorAll('.project-window').forEach(win=>{
+  const loader=win.querySelector('.floppy-loader')
+  if(!loader) return
+
+  const bar=loader.querySelector('.loading-bar div')
+  const body=win.querySelector('.project-body')
+
+  let progress=0
+  const interval=setInterval(()=>{
+   progress+=10
+   if(bar) bar.style.width=progress+'%'
+
+   if(progress>=100){
+    clearInterval(interval)
+    loader.style.display='none'
+    if(body) body.style.display='block'
+   }
+  },80)
+ })
+
+
+/* close start menu and popup when clicking outside */
+document.addEventListener('click',function(e){
+ const start=document.querySelector('.start')
+ const startMenu=document.getElementById('startMenu')
+ const popup=document.getElementById('copyrightPopup')
+ const clock=document.getElementById('datetime')
+
+ if(startMenu && start && !start.contains(e.target)){
+  startMenu.style.display='none'
+ }
+
+ if(popup && !popup.contains(e.target) && e.target!==clock){
+  popup.style.display='none'
+ }
+})
+
+window.onload = openWindow('about')
+
+
+</script>
+
+<div class="image-viewer" id="viewer" onclick="closeViewer()">
+<div class="viewer-close">Close</div>
+<img>
+</div>
+
+</body>
 </html>
