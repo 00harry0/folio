@@ -1,15 +1,17 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Harryb.art</title>
-<link rel="icon" type="image/x-icon" href="/images/Hbfav.ico">
+<title>Retro Desktop Portfolio</title>
 <style>
-
 body{margin:0;font-family:monospace;background:#000;height:100vh;overflow:hidden;display:flex;justify-content:center;align-items:center;image-rendering:pixelated}
-.monitor-frame{border:15px solid #2c2c2c; border-radius:10px; width:99%; height:99%; box-sizing:border-box; display:flex; flex-direction:column; position:relative; background:#008080; overflow:hidden;}
+
+/* HB95 boot screen */
+.boot-screen{position:absolute;top:0;left:0;width:100%;height:100%;background:#000;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:22px;z-index:9999}
+.boot-bar{width:320px;height:18px;border:2px solid #fff;margin-top:20px}
+.boot-bar div{height:100%;width:0;background:#fff}
+.monitor-frame{border:15px solid #2c2c2c; border-radius:10px; width:99%; height:99%; box-sizing:border-box; display:flex; flex-direction:column; position:relative; background:#00805a; overflow:hidden;}
 .desktop{position:relative;flex:1;width:100%;height:100%; display:flex; flex-direction:column;}
 .icon{width:80px;text-align:center;color:white;margin:20px;cursor:pointer;position:absolute;user-select:none;}
 .icon img{width:48px;height:48px;display:block;margin:auto}
@@ -24,26 +26,27 @@ body{margin:0;font-family:monospace;background:#000;height:100vh;overflow:hidden
 .titlebar .controls{display:flex;gap:2px}
 .titlebar .controls div{width:16px;height:16px;background:#c0c0c0;border:1px solid #000;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;font-weight:bold}
 
-.content{padding:10px;background:#c0c0c0;color:black;height:calc(100% - 30px);overflow:auto;scrollbar-width:auto;scrollbar-color:#000080 #c0c0c0}
+.content{padding:10px;background:#c0c0c0;color:black;height:calc(100% - 30px);overflow:auto;scrollbar-width:33px;scrollbar-color:#000080 #c0c0c0}
 
 /* custom scrollbar so default one does not appear */
-.content::-webkit-scrollbar{width:12px}
+.content::-webkit-scrollbar{width:33px}
 .content::-webkit-scrollbar-track{background:#c0c0c0;border:1px solid #000}
 .content::-webkit-scrollbar-thumb{background:#000080;border:1px solid #000}
 .content::-webkit-scrollbar-button{display:none}
 
-.taskbar{position:absolute;bottom:0;left:0;width:100%;background:#c0c0c0;border-top:2px solid #000;height:32px;display:flex;align-items:center;justify-content:space-between;z-index:1000;padding:0 8px;box-sizing:border-box}
-.taskbar button{margin:0 2px;padding:2px 6px;background:#c0c0c0;border:1px solid #000;cursor:pointer;font-family:monospace}
+.taskbar{position:absolute;bottom:0;left:0;width:100%;background:#c0c0c0;border-top:1px solid #000;height:28px;display:flex;align-items:center;justify-content:space-between;z-index:1000;padding:0 8px;box-sizing:border-box}
+.taskbar button{margin:1px;padding:2px 6px;background:#c0c0c0;height:100%;border:1px solid #000;cursor:pointer;font-family:monospace}
 
-.start{background:#c0c0c0;border:2px solid #000;padding:2px 10px;margin:2px;cursor:pointer;position:absolute;bottom:0;left:0;z-index:1002}
+
+.start{background:#c0c0c0;border:2px solid #000;padding:2px 10px;cursor:pointer;position:relative}
 .start-menu{display:none;position:absolute;bottom:32px;left:0;width:150px;background:#c0c0c0;border:2px solid #000;padding:5px;z-index:1002}
 .start-menu div{padding:4px;cursor:pointer}
 .start-menu div:hover{background:#000080;color:white}
 
-.datetime{cursor:pointer;font-size:12px;padding:2px 6px;border:2px inset #000;border-radius:2px}
+.datetime{cursor:pointer;font-size:12px;padding:2px 6px;border:1px inset #000;border-radius:1px}
 .popup{position:absolute;bottom:40px;right:8px;width:200px;background:#c0c0c0;border:2px solid #000;padding:8px;display:none;z-index:1003;font-size:12px}
 
-.gallery{display:flex;flex-wrap:wrap;gap:20px;justify-content:flex-start;background:white;padding:10px;border:2px inset #808080}
+.gallery{display:flex;flex-wrap:wrap;gap:20px;justify-content:flex-start;background:white;padding:10px;border:2px inset #808080;height:100%;align-content:flex-start}
 .gallery .project-icon{width:auto;text-align:center;color:black;cursor:pointer;background:#e0e0e0;border:1px solid #000;padding:5px}
 .gallery .project-icon img{width:220px;height:220px;display:block;margin:auto}
 .gallery .project-title{font-weight:bold;margin-top:4px;text-align:center}
@@ -59,6 +62,7 @@ body{margin:0;font-family:monospace;background:#000;height:100vh;overflow:hidden
 .aspect-16-9{width:70%;aspect-ratio:16/9;padding:2% 15% 0% 15%;display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:pointer}
 .aspect-16-9 img{width:100%;height:100%;object-fit:cover}
 
+
 /* image viewer */
 .image-viewer{position:absolute;top:0;left:0;width:100%;height:100%;background:#000;display:none;align-items:center;justify-content:center;z-index:5000}
 .image-viewer img{max-width:95%;max-height:95%}
@@ -71,18 +75,28 @@ body{margin:0;font-family:monospace;background:#000;height:100vh;overflow:hidden
 .loading-bar{width:200px;height:10px;border:2px solid #000;background:#fff}
 .loading-bar div{height:100%;width:0;background:#000}
 
-.folder-nav{font-size:20px;margin-bottom:10px;color:#000080;cursor:pointer}
+.folder-nav{font-size:12px;margin-bottom:10px;color:#000080;cursor:pointer}
 
 
 
 /* desktop selection box */
 .selection-box{position:absolute;border:1px dashed #000;background:rgba(0,0,255,0.15);pointer-events:none;display:none}
 
+.context-menu{position:absolute;background:#c0c0c0;border:2px solid #000;display:none;z-index:9999;font-size:12px}
+.context-menu div{padding:4px 10px;cursor:pointer}
+.context-menu div:hover{background:#000080;color:white}
+
 </style>
 </head>
 <body>
 
-<div class="monitor-frame">
+<div class="boot-screen" id="bootScreen">
+<div style="font-size:42px;font-weight:bold;letter-spacing:2px"> </div> 
+<div style="font-size:14px;margin-top:8px"> </div>
+<div class="boot-bar"><div id="bootProgress"></div></div>
+</div>
+
+<div class="monitor-frame" id="desktopFrame" style="display:none">
 <div class="desktop" id="desktop">
 
 <!-- SINGLE CLICK icons -->
@@ -104,20 +118,32 @@ body{margin:0;font-family:monospace;background:#000;height:100vh;overflow:hidden
 <!-- WINDOW sizes defined with data attributes -->
 <div id="about" class="window" data-width="420" data-height="420">
 <div class="titlebar">About Me <div class="controls"><div onclick="minimizeWindow('about')">_</div><div onclick="toggleFullscreen('about')">□</div><div onclick="closeWindow('about')">×</div></div></div>
-<div class="content"><p>I’m a 3D Generalist specialising in Unreal Engine - creating cinematic experiences for both real-time and pre-rendered pipelines.<br>
+
+<div class="content">
+
+<div class="win95-panel" style="margin-bottom:10px">
+
+<p>I’m a 3D Generalist specialising in Unreal Engine - creating cinematic experiences for both real-time and pre-rendered pipelines.<br>
 <br></br>
 I’m a multidisciplinary artist with experience working across game and television productions, cinematics, asset creation and on-set support in both pre/post-vis. While my core focus is 3D and Unreal Engine, my broader creative background includes UI design, 2D artwork, illustration, and creative design.<br>
 <br></br>
 My background as a generalist allows me to move comfortably between environment creation, cinematic layout, lighting, and technical setup, while keeping a strong focus on storytelling and visual clarity.</p>
 
+</div>
 
 </div>
 </div>
 
-<div id="art" class="window">
+<div id="art" class="window" >
 <div class="titlebar">Cinematic Work <div class="controls"><div onclick="minimizeWindow('art')">_</div><div onclick="toggleFullscreen('art')">□</div><div onclick="closeWindow('art')">×</div></div></div>
 <div class="content">
-<div class="win95-panel"><div class="gallery" style="justify-content:flex-start">
+
+<div class="win95-panel" style="margin-bottom:10px">
+<b>About these projects</b><br>
+My 3D work focuses on cinematics, pre/post-vis, and virtual production using Unreal Engine. I’ve worked across game and television projects creating cinematic sequences, shot layouts, environments, and on-set support to help teams explore and refine visual storytelling and vfx before production.
+</div>
+
+<div class="art-root"><div class="gallery">
 <div class="project-icon" onclick="openWindow('3d1')"><img src="https://harryb.art/images/SOT/1920/sot_cover.png"><div class="project-title">Sea Of Thieves</div></div>
 <div class="project-icon" onclick="openWindow('3d2')"><img src="https://harryb.art/images/outriders/1920/outriders_cover.png"><div class="project-title">Outriders</div></div>
 <div class="project-icon" onclick="openWindow('3d3')"><img src="https://harryb.art/images/CM1f25/25/1920/cmf125_cover.png"><div class="project-title">F125</div></div>
@@ -126,14 +152,19 @@ My background as a generalist allows me to move comfortably between environment 
 
 </div>
 </div>
-<p>My 3D work focuses on cinematics, pre/post-vis, and virtual production using Unreal Engine. I’ve worked across game and television projects creating cinematic sequences, shot layouts, environments, and on-set support to help teams explore and refine visual storytelling and vfx before production.</p>
 </div>
 </div>
 
-<div id="projects" class="window" data-width="1100" data-height="680">
+<div id="projects" class="window">
 <div class="titlebar">Other Work <div class="controls"><div onclick="minimizeWindow('projects')">_</div><div onclick="toggleFullscreen('projects')">□</div><div onclick="closeWindow('projects')">×</div></div></div>
 <div class="content">
-<div class="win95-panel"><div class="gallery" style="justify-content:flex-start">
+
+<div class="win95-panel" style="margin-bottom:10px">
+<b>About these projects</b><br>
+My 3D work focuses on cinematics, pre/post-vis, and virtual production using Unreal Engine. I’ve worked across game and television projects creating cinematic sequences, shot layouts, environments, and on-set support to help teams explore and refine visual storytelling and vfx before production.
+</div>
+
+<div class="projetcs-root"><div class="gallery">
 <div class="project-icon" onclick="openWindow('p1')"><img src="https://harryb.art/images/na.png"><div class="project-title">Arctic scene (ue)</div></div>
 <div class="project-icon" onclick="openWindow('p2')"><img src="https://harryb.art/images/lockerbie/lockerbie_cover.png"><div class="project-title">Lockerbie</div></div>
 <div class="project-icon" onclick="openWindow('p3')"><img src="https://harryb.art/images/na.png"><div class="project-title">GGVA</div></div>
@@ -144,17 +175,17 @@ My background as a generalist allows me to move comfortably between environment 
 
 </div>
 </div>
-<p>Alongside my 3D work, I also create UI design, 2D artwork, illustration, and digital design. This side of my work focuses on visual communication, layout, and user experience across interfaces, web design, and creative projects. It complements my real-time work by bringing a strong design sensibility to both tools and visuals.</p>
 </div>
 </div>
+
 
 <!-- PROJECT WINDOWS -->
 <!-- cinematic work -->
 <div id="3d1" class="window" data-width="900" data-height="600" data-startfullscreen="true">
 <div class="titlebar">3D Project 1 <div class="controls"><div onclick="minimizeWindow('3d1')">_</div><div onclick="toggleFullscreen('3d1')">□</div><div onclick="closeWindow('3d1')">×</div></div></div>
 <div class="content project-window">
-<div class="floppy-loader"><div class="floppy"></div><div>Loading project from floppy disk...</div><div class="loading-bar"><div></div></div></div>
-<div class="project-body" style="display:none">
+
+<div class="project-body" style="display:contents">
 <div class="folder-nav" onclick="closeWindow(this.closest('.window').id)">← Cinematic Work</div>
 <div class="project-header"><h2>Sea Of Thieves</h2>
   
@@ -182,8 +213,8 @@ Working closely with rare over the years I've worked on all of their in engine c
 <div id="3d2" class="window" data-width="900" data-height="600" data-startfullscreen="true">
 <div class="titlebar">3D Project 1 <div class="controls"><div onclick="minimizeWindow('3d2')">_</div><div onclick="toggleFullscreen('3d2')">□</div><div onclick="closeWindow('3d2')">×</div></div></div>
 <div class="content project-window">
-<div class="floppy-loader"><div class="floppy"></div><div>Loading project from floppy disk...</div><div class="loading-bar"><div></div></div></div>
-<div class="project-body" style="display:none">
+
+<div class="project-body" style="display:contents">
 <div class="folder-nav" onclick="closeWindow(this.closest('.window').id)">← Cinematic Work</div>
 <div class="project-header"><h2>Outriders / People Can Fly</h2>
   
@@ -210,8 +241,8 @@ This was the first AAA game i got to contribute to - working with a small team t
 <div id="3d3" class="window" data-width="900" data-height="600" data-startfullscreen="true">
 <div class="titlebar">3D Project 1 <div class="controls"><div onclick="minimizeWindow('3d3')">_</div><div onclick="toggleFullscreen('3d3')">□</div><div onclick="closeWindow('3d3')">×</div></div></div>
 <div class="content project-window">
-<div class="floppy-loader"><div class="floppy"></div><div>Loading project from floppy disk...</div><div class="loading-bar"><div></div></div></div>
-<div class="project-body" style="display:none">
+
+<div class="project-body" style="display:contents">
 <div class="folder-nav" onclick="closeWindow(this.closest('.window').id)">← Cinematic Work</div>
 <div class="project-header"><h2>F1 2025 / Codemasters</h2>
   
@@ -240,8 +271,8 @@ F125 in engine pre rendered cut-scenes in path-tracer. Over 90 minutes of cut-sc
 <div id="3d4" class="window" data-width="900" data-height="600" data-startfullscreen="true">
 <div class="titlebar">3D Project 1 <div class="controls"><div onclick="minimizeWindow('3d4')">_</div><div onclick="toggleFullscreen('3d4')">□</div><div onclick="closeWindow('3d4')">×</div></div></div>
 <div class="content project-window">
-<div class="floppy-loader"><div class="floppy"></div><div>Loading project from floppy disk...</div><div class="loading-bar"><div></div></div></div>
-<div class="project-body" style="display:none">
+
+<div class="project-body" style="display:contents">
 <div class="folder-nav" onclick="closeWindow(this.closest('.window').id)">← Cinematic Work</div>
 <div class="project-header"><h2>Everwild (ue4) / Rare</h2>
   
@@ -271,8 +302,8 @@ I had the unique opportunity to work on a (now cancelled) RARE project in 2019&2
 <div id="3d5" class="window" data-width="900" data-height="600" data-startfullscreen="true">
 <div class="titlebar">3D Project 1 <div class="controls"><div onclick="minimizeWindow('3d5')">_</div><div onclick="toggleFullscreen('3d5')">□</div><div onclick="closeWindow('3d5')">×</div></div></div>
 <div class="content project-window">
-<div class="floppy-loader"><div class="floppy"></div><div>Loading project from floppy disk...</div><div class="loading-bar"><div></div></div></div>
-<div class="project-body" style="display:none">
+
+<div class="project-body" style="display:contents">
 <div class="folder-nav" onclick="closeWindow(this.closest('.window').id)">← Cinematic Work</div>
 <div class="project-header"><h2>Everwild (vray) / Rare</h2>
   
@@ -303,8 +334,8 @@ I had the unique opportunity to work on a (now cancelled) RARE project in 2019&2
 <div id="p2" class="window" data-width="900" data-height="600" data-startfullscreen="true">
 <div class="titlebar">3D Project 1 <div class="controls"><div onclick="minimizeWindow('p2')">_</div><div onclick="toggleFullscreen('p2')">□</div><div onclick="closeWindow('p2')">×</div></div></div>
 <div class="content project-window">
-<div class="floppy-loader"><div class="floppy"></div><div>Loading project from floppy disk...</div><div class="loading-bar"><div></div></div></div>
-<div class="project-body" style="display:none">
+
+<div class="project-body" style="display:contents">
 <div class="folder-nav" onclick="closeWindow(this.closest('.window').id)">← Other Work</div>
 <div class="project-header"><h2>Lockerbie</h2>
   
@@ -332,88 +363,156 @@ Provided on set VFX support through the use of virtual production tools & VFX po
 </div>
 
 <!--END other work -->
-
 <!-- TASKBAR -->
-<div class="taskbar" id="taskbar">
-<div id="taskbar-left" style="margin-left:70px"></div>
+<div id="shutdown" class="window" data-width="300" data-height="180">
+<div class="titlebar">Shut Down<div class="controls"><div onclick="closeWindow('shutdown')">×</div></div></div>
+<div class="content"><div class="win95-panel" style="text-align:center">Shut down HB95?<br><br><button onclick="location.reload()">Restart</button></div></div>
+</div>
+
+</div>
+
+<div class="taskbar">
+<div class="start" id="startButton">Start
+<div class="start-menu" id="startMenu">
+<div onclick="openWindow('computer')">My Computer</div>
+<div onclick="openWindow('settings')">Settings</div>
+<div onclick="openWindow('about')">About</div>
+<div onclick="openWindow('art')">Cinematic Work</div>
+<div onclick="openWindow('projects')">Other Work</div>
+<hr>
+<div onclick="openWindow('shutdown')">Restart.</div>
+</div>
+</div>
+
+<div id="taskbar-left" style="display:flex;flex:1;margin-left:6px"></div>
+
 <div class="datetime" id="datetime" onclick="togglePopup()"></div>
 </div>
 
 <div class="popup" id="copyrightPopup">© 2026 HarryB.art. All rights reserved. <br> </br>The contents contained in the images on this site are copyright of their respective owners - 
   I do not claim ownership of the individual IP.</div>
 
-<div class="start" onclick="toggleStartMenu()">Start
-<div class="start-menu" id="startMenu">
-<div onclick="openWindow('about')">About Me</div>
-<div onclick="openWindow('art')">Cinematic Work</div>
-<div onclick="openWindow('projects')">Other Work</div>
-</div>
 </div>
 
+<div id="desktopMenu" class="context-menu">
+<div onclick="alert('Refresh')">Refresh</div>
+<div onclick="openWindow('settings')">Settings</div>
 </div>
+
+<div id="taskbarMenu" class="context-menu">
+<div id="taskbarClose">Close</div>
 </div>
+
 
 <script>
 
-let zIndexCounter = 1
-let selectionBox
-let selectStartX=0
-let selectStartY=0
-const minimizedWindows = {}
+let z=1
+const taskbarButtons={}
+let active=null
+let cascade=0
+let taskbarTarget=null
+
+function setActive(id){
+ const w=document.getElementById(id)
+ if(!w)return
+
+ document.querySelectorAll('.window').forEach(win=>{
+  win.querySelector('.titlebar').style.background='#808080'
+ })
+
+ w.querySelector('.titlebar').style.background='#000080'
+ z++
+ w.style.zIndex=z
+ active=id
+
+ Object.values(taskbarButtons).forEach(b=>b.style.border='1px solid #000')
+ if(taskbarButtons[id])taskbarButtons[id].style.border='2px inset #000'
+}
+
+function ensureTaskbarButton(id){
+ if(taskbarButtons[id])return
+
+ const btn=document.createElement('button')
+ btn.textContent=id
+
+ btn.onclick=()=>{
+  const w=document.getElementById(id)
+  if(w.style.display==='none')w.style.display='block'
+  setActive(id)
+ }
+
+ btn.oncontextmenu=(e)=>{
+  e.preventDefault()
+  e.stopPropagation()
+  taskbarTarget=id
+  const menu=document.getElementById('taskbarMenu')
+  menu.style.left=e.pageX+'px'
+  menu.style.top=e.pageY+'px'
+  menu.style.display='block'
+ }
+
+ document.getElementById('taskbar-left').appendChild(btn)
+ taskbarButtons[id]=btn
+}
 
 function openWindow(id){
  const win=document.getElementById(id)
- if(!win) return
+ if(!win)return
 
- if(!win.dataset.initialized){
-   const w=win.dataset.width
-   const h=win.dataset.height
-   if(w) win.style.width=w+'px'
-   if(h) win.style.height=h+'px'
+  /* prevent reopening already visible window */
+ if(win.style.display==='block'){
+   setActiveWindow(id)
+   return
+ }
+
+ ensureTaskbarButton(id)
+
+ const frame=document.getElementById('desktopFrame')
+ const frameRect=frame.getBoundingClientRect()
+
+ if(!win.dataset.init){
+  let w=parseInt(win.dataset.width || frameRect * 0.6)
+   let h=parseInt(win.dataset.height || frameRect* 0.80)
+
+   const maxW=frameRect.width-40
+   const maxH=frameRect.height-160
+
+   if(w>maxW) w=maxW
+   if(h>maxH) h=maxH
+
+   win.style.width=w+'px'
+   win.style.height=h+'px'
+
    win.dataset.initialized=true
  }
 
- win.style.display='block'
- zIndexCounter++
- win.style.zIndex=zIndexCounter
+ cascade+=30
+ if(cascade>180)cascade=0
 
- if(win.dataset.startfullscreen==='true' && win.dataset.fullscreen!=='true'){
+ win.style.left=(80+cascade)+'px'
+ win.style.top=(60+cascade)+'px'
+ win.style.display='block'
+ setActive(id)
+  if(win.dataset.startfullscreen==='true' && win.dataset.fullscreen!=='true'){
    toggleFullscreen(id)
  }
-
- restoreFromTaskbar(id)
 }
 
 function closeWindow(id){
- const win=document.getElementById(id)
- if(!win) return
- win.style.display='none'
- removeFromTaskbar(id)
+ const w=document.getElementById(id)
+ if(w)w.style.display='none'
+
+ if(taskbarButtons[id]){
+  taskbarButtons[id].remove()
+  delete taskbarButtons[id]
+ }
 }
 
 function minimizeWindow(id){
- const win=document.getElementById(id)
- if(!win) return
- win.style.display='none'
- addToTaskbar(id)
+ const w=document.getElementById(id)
+ if(w)w.style.display='none'
+ if(taskbarButtons[id])taskbarButtons[id].style.border='1px solid #000'
 }
-
-function addToTaskbar(id){
- if(minimizedWindows[id]) return
- const bar=document.getElementById('taskbar-left')
- const btn=document.createElement('button')
- btn.textContent=document.getElementById(id).querySelector('.titlebar').textContent.replace(/[_×□]/g,'').trim()
- btn.onclick=()=>openWindow(id)
- bar.appendChild(btn)
- minimizedWindows[id]=btn
-}
-
-function removeFromTaskbar(id){
- const btn=minimizedWindows[id]
- if(btn){btn.remove();delete minimizedWindows[id]}
-}
-
-function restoreFromTaskbar(id){removeFromTaskbar(id)}
 
 function toggleFullscreen(id){
  const win=document.getElementById(id)
@@ -438,164 +537,133 @@ function toggleFullscreen(id){
  }
 }
 
-function toggleStartMenu(){
- const menu=document.getElementById('startMenu')
- menu.style.display=menu.style.display==='block'?'none':'block'
+function toggleStartMenu(e){
+ e.stopPropagation()
+ const m=document.getElementById('startMenu')
+ m.style.display=m.style.display==='block'?'none':'block'
 }
 
-function openFullscreenProject(id){
- document.querySelectorAll('.fullscreen-project').forEach(p=>p.style.display='none')
- const project=document.getElementById(id)
- if(project) project.style.display='block'
-}
-
-function closeFullscreenProject(id){
- const project=document.getElementById(id)
- if(project) project.style.display='none'
-}
-
-function updateDateTime(){
- const now=new Date()
- document.getElementById('datetime').textContent=now.toLocaleTimeString()
-}
-
-setInterval(updateDateTime,1000)
-updateDateTime()
+document.getElementById('startButton').addEventListener('click',toggleStartMenu)
 
 function togglePopup(){
- const popup=document.getElementById('copyrightPopup')
- popup.style.display=popup.style.display==='block'?'none':'block'
+ const p=document.getElementById('copyrightPopup')
+ p.style.display=p.style.display==='block'?'none':'block'
 }
 
-/* WINDOW DRAGGING + DOUBLE CLICK FULLSCREEN */
+function updateClock(){
+ document.getElementById('datetime').textContent=new Date().toLocaleTimeString()
+}
+setInterval(updateClock,1000)
+updateClock()
+
+/* close menus */
+
+document.addEventListener('click',()=>{
+ document.getElementById('startMenu').style.display='none'
+ document.getElementById('desktopMenu').style.display='none'
+ document.getElementById('taskbarMenu').style.display='none'
+})
+
+/* desktop right click */
+
+const desktop=document.getElementById('desktop')
+desktop.addEventListener('contextmenu',(e)=>{
+ e.preventDefault()
+ const menu=document.getElementById('desktopMenu')
+ menu.style.left=e.pageX+'px'
+ menu.style.top=e.pageY+'px'
+ menu.style.display='block'
+})
+
+/* taskbar close */
+
+document.getElementById('taskbarClose').onclick=()=>{
+ if(taskbarTarget)closeWindow(taskbarTarget)
+ document.getElementById('taskbarMenu').style.display='none'
+}
+
+
+/* window dragging */
 
 document.querySelectorAll('.window').forEach(win=>{
  const bar=win.querySelector('.titlebar')
- let offsetX,offsetY,drag=false
+ let drag=false,ox=0,oy=0
 
  bar.addEventListener('mousedown',e=>{
-  if(e.target.closest('.controls')) return
+  if(e.target.closest('.controls'))return
   drag=true
-  offsetX=e.clientX-win.offsetLeft
-  offsetY=e.clientY-win.offsetTop
-  zIndexCounter++
-  win.style.zIndex=zIndexCounter
+  ox=e.clientX-win.offsetLeft
+  oy=e.clientY-win.offsetTop
+  setActive(win.id)
  })
 
- bar.addEventListener('dblclick',e=>{
-  if(e.target.closest('.controls')) return
-  toggleFullscreen(win.id)
- })
+ bar.addEventListener('dblclick',()=>toggleFullscreen(win.id))
 
  document.addEventListener('mousemove',e=>{
-  if(!drag) return
-  win.style.left=(e.clientX-offsetX)+'px'
-  win.style.top=(e.clientY-offsetY)+'px'
+  if(!drag)return
+
+  const frame=document.getElementById('desktopFrame').getBoundingClientRect()
+
+  let x=e.clientX-ox
+  let y=e.clientY-oy
+
+  if(x<0)x=0
+  if(y<0)y=0
+
+  if(x+win.offsetWidth>frame.width)x=frame.width-win.offsetWidth
+  if(y+win.offsetHeight>frame.height-32)y=frame.height-win.offsetHeight-32
+
+  win.style.left=x+'px'
+  win.style.top=y+'px'
  })
 
  document.addEventListener('mouseup',()=>drag=false)
 })
 
-
-function openImage(el){
- const viewer=document.getElementById('viewer')
- const img=viewer.querySelector('img')
- img.src=el.querySelector('img').src
- viewer.style.display='flex'
-}
-
-function closeViewer(){
- document.getElementById('viewer').style.display='none'
-}
+/* desktop selection */
 
 
+/* boot */
 
-/* DESKTOP SELECTION BOX */
-const desktop=document.getElementById('desktop')
-selectionBox=document.createElement('div')
-selectionBox.className='selection-box'
-desktop.appendChild(selectionBox)
+function startBoot(){
+ const bios=document.createElement('div')
+ bios.style.position='absolute'
+ bios.style.top='0'
+ bios.style.left='0'
+ bios.style.width='100%'
+ bios.style.height='100%'
+ bios.style.background='#000'
+ bios.style.color='#0f0'
+ bios.style.fontFamily='monospace'
+ bios.style.padding='20px'
+ bios.style.zIndex='10000'
+ bios.innerHTML=``
+ document.body.appendChild(bios)
 
-let selecting=false
+ setTimeout(()=>{
+  bios.remove()
 
-desktop.addEventListener('mousedown',e=>{
- if(e.target!==desktop) return
- selecting=true
- selectStartX=e.offsetX
- selectStartY=e.offsetY
- selectionBox.style.left=selectStartX+'px'
- selectionBox.style.top=selectStartY+'px'
- selectionBox.style.width='0px'
- selectionBox.style.height='0px'
- selectionBox.style.display='block'
-})
+  const boot=document.getElementById('bootScreen')
+  const frame=document.getElementById('desktopFrame')
+  const bar=document.getElementById('bootProgress')
 
-document.addEventListener('mousemove',e=>{
- if(!selecting) return
- const rect=desktop.getBoundingClientRect()
- const x=e.clientX-rect.left
- const y=e.clientY-rect.top
+  let p=0
+  const i=setInterval(()=>{
+   p+=5
+   bar.style.width=p+'%'
 
- const w=x-selectStartX
- const h=y-selectStartY
-
- selectionBox.style.width=Math.abs(w)+'px'
- selectionBox.style.height=Math.abs(h)+'px'
- selectionBox.style.left=(w<0?x:selectStartX)+'px'
- selectionBox.style.top=(h<0?y:selectStartY)+'px'
-})
-
-document.addEventListener('mouseup',()=>{
- if(!selecting) return
- selecting=false
- selectionBox.style.display='none'
-})
- document.querySelectorAll('.project-window').forEach(win=>{
-  const loader=win.querySelector('.floppy-loader')
-  if(!loader) return
-
-  const bar=loader.querySelector('.loading-bar div')
-  const body=win.querySelector('.project-body')
-
-  let progress=0
-  const interval=setInterval(()=>{
-   progress+=10
-   if(bar) bar.style.width=progress+'%'
-
-   if(progress>=100){
-    clearInterval(interval)
-    loader.style.display='none'
-    if(body) body.style.display='block'
+   if(p>=100){
+    clearInterval(i)
+    boot.style.display='none'
+    frame.style.display='flex'
    }
-  },80)
- })
 
+  },30)
 
-/* close start menu and popup when clicking outside */
-document.addEventListener('click',function(e){
- const start=document.querySelector('.start')
- const startMenu=document.getElementById('startMenu')
- const popup=document.getElementById('copyrightPopup')
- const clock=document.getElementById('datetime')
-
- if(startMenu && start && !start.contains(e.target)){
-  startMenu.style.display='none'
- }
-
- if(popup && !popup.contains(e.target) && e.target!==clock){
-  popup.style.display='none'
- }
-})
-
-window.onload = openWindow('about')
-
-function getScreenWidthOffset(id){
-	return screen.width * 0.66+'px'
-}
-function getScreenHeightOffset(id){
-	return screen.height * 0.70+'px'
+ },300)
 }
 
+startBoot()
 
 </script>
 
