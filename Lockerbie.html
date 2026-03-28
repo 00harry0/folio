@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="assets/css/main.css" />
+
+<title>Lockerbie</title>
+<link rel="icon" type="image/x-icon" href="https://harryb.art/images/Hbfav.ico">
+
+</head>
+<body>
+<main>
+<h1>Lockerbie</h1>
+<h2 style="margin-bottom: 100px">2025</h2>
+<p style="margin-bottom: 50px">
+Beginning production in 2024, this project represented a shift in pace for me. I was tasked with developing a proof-of-concept on-set virtual production tool, working within a
+ limited budget while supporting a production dealing with historically sensitive subject matter related to Lockerbie bombing.
+<br> </br>
+Because of the need for historical accuracy and careful visual planning, our goal was to explore how virtual production workflows could be integrated into the pre-production 
+and on-set planning stages. The aim was to give directors and VFX supervisors clearer insight into the scope of set extensions, environments, and visual effects before and during principal photography.
+<br> </br>
+To achieve this, we developed a virtual recreation of Lockerbie, which could be brought directly onto set as an interactive planning tool. This virtual environment allowed the
+ director and VFX team to visualise complex shots, plan camera placements, and better understand how digital extensions would integrate with practical sets and locations.
+<br> </br>
+Beyond pre-production planning, the virtual Lockerbie environment also became a valuable post-visualisation tool. By quickly generating VFX previews, we were able to support 
+decision-making during shoot days, helping the director evaluate coverage, staging, and the feasibility of certain fx before committing to more expensive production or post-production work.
+<br> </br>
+This approach allowed the team to prototype ideas, validate shot concepts and avoid uncertainty 
+during filming while maintaining sensitivity to the real-world events being portrayed.
+</p>
+<p style="margin-bottom: 100px"> Tools used: Unreal Engine 5 / Maya / Embergen
+<br> </br>
+My role: On set support / Virtual production tools / pre and post vis for vfx
+</p>
+
+
+<div class="project-images" >
+
+<iframe width="900" height="500" src="https://www.youtube.com/embed/wYuKaK4Ih34?si=XSWnetOBZpi0oExs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<iframe width="900" height="500" src="https://player.vimeo.com/video/1075226489?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" title="Vfx BreakDown" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/lockerbie/41.png"></div>
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/lockerbie/43.png"></div>
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/lockerbie/40.png"></div>
+
+</div>
+</main>
+
+<div class="image-viewer" id="viewer" onclick="closeViewer()">
+<div class="viewer-close">Close</div>
+<img>
+</div>
+
+<script>
+    function openImage(el){
+ const viewer=document.getElementById('viewer')
+ const img=viewer.querySelector('img')
+ img.src=el.querySelector('img').src
+ viewer.style.display='flex'
+}
+
+function closeViewer(){
+ document.getElementById('viewer').style.display='none'
+}
+
+</script>
+
+</body>
+</html>
