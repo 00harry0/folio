@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="assets/css/main.css" />
+
+<title>Sea Of Thieves</title>
+
+</head>
+<body>
+Project description placeholder. Explain the work, tools used, challenges, etc.
+<main>
+<h1>Sea Of Thieves</h1>
+<h2 style="margin-bottom: 100px">2018 - 2026</h2>
+<p style="margin-bottom: 50px">Working with Rare on all of their cinematic trailers(it must be over 20 by now!) from previs to final frames. 
+The process would require our team to extract game assets from Rares perforce, modify props and re-rig characters for our pipeline & animators then 
+intergrate back into their version of unreal.
+<br></br>
+We'd take temporary assets and block previs scenes in maya, moving over to unreal to produce the next stage
+of previs where final cameras and cuts would be locked in sequencer.  We'd then continue to scene & look dev custom environments, modify props and 
+make bespoke VFX, these would then all be lit in the in unreal where we would pull back the optimisation limitations and tweak post prcoessing to produce 
+striking visuals.</p>
+
+<p style="margin-bottom: 100px"> Tools used: Unreal Engine 4 / Maya / Photoshop / houdini / Premier / Nuke
+<br> </br>
+My role: Layout / Setup / Previs / Asset work / Lighting /Scene & look dev / Final frame rendering / Edit, Output + Comp where required
+</p>
+
+
+
+<div class="project-images" >
+
+<iframe width="100%" height="auto" src="https://www.youtube.com/embed/Lb37O5LCpyY?si=GQM-hxXrDMCgiL6H" 
+title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
+gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/images/sot/SoT_cine_4k_12.png"></div>
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/images/sot/SoT_cine_4k_07.png"></div>
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/images/sot/SoT_cine_4k_02.png"></div>
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/images/sot/SoT_cine_4k_03.png"></div>
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/images/sot/SoT_cine_4k_01.png"></div>
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/images/sot/SoT_cine_4k_08.png"></div>
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/images/sot/SoT_cine_4k_04.png"></div>
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/images/sot/SoT_cine_4k_05.png"></div>
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/images/sot/SoT_cine_4k_06.png"></div>
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/images/sot/SoT_cine_4k_10.png"></div>
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/images/sot/SoT_cine_4k_11.png"></div>
+
+</div>
+</main>
+
+<div class="image-viewer" id="viewer" onclick="closeViewer()">
+<div class="viewer-close">Close</div>
+<img>
+</div>
+
+<script>
+    function openImage(el){
+ const viewer=document.getElementById('viewer')
+ const img=viewer.querySelector('img')
+ img.src=el.querySelector('img').src
+ viewer.style.display='flex'
+}
+
+function closeViewer(){
+ document.getElementById('viewer').style.display='none'
+}
+
+</script>
+
+</body>
+</html>
