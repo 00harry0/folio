@@ -17,8 +17,11 @@ section{max-width:1100px;margin:auto;padding:40px 20px}
 a:link, a:visited {background-color: rgba(244, 67, 54, 0);color: white;padding: 15px 25px;text-align: center;text-decoration: none;display: inline-block;}
 a:hover, a:active {background-color: rgba(255, 255, 255, 0);}
 
-.project-back {position:fixed;top:10px;left:10px;background:#000000;border:2px solid #000;padding:4px 8px;cursor:pointer;z-index:5001}
+/* project page back button(top left) */
+.project-back {position:fixed;top:10px;left:0px;background:#000000;border:2px solid #000;cursor:pointer;z-index:3001}
+.project-back a {padding: 10px}
 
+/* project page main */
 main{max-width:1100px;margin:auto;padding:40px 20px;justify-items:center}
 main .h1{margin-bottom:10px}
 main .p{}
@@ -27,7 +30,8 @@ main .p{}
 .aspect-16-9{cursor:pointer}
 .aspect-16-9 img{width:100%;height:100%;object-fit:cover}
 
-/* image viewer */
+/* project pageimage viewer (top right) */
 .image-viewer{position:fixed;top:0;left:0;width:100%;height:100%;background:#000;display:none;align-items:center;justify-content:center;z-index:5000}
 .image-viewer img{max-width:95%;max-height:95%}
-.viewer-close{position:absolute;top:10px;right:10px;background:#c0c0c0;border:2px solid #000;padding:4px 8px;cursor:pointer;z-index:5001}
+.viewer-close{position:absolute;top:10px;right:10px;background:#000000;text-color:#fff;border:2px solid #000;padding:4px 8px;cursor:pointer;z-index:5001}
+.viewer-close p {color:#fff;}
