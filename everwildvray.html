@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="assets/css/main.css" />
+
+<title>Everwild (vray)</title>
+<link rel="icon" type="image/x-icon" href="https://harryb.art/images/Hbfav.ico">
+
+</head>
+<body>
+    
+<div class="project-back">
+<a href="https://harryb.art/">
+< Home
+</a>
+</div>
+
+<main>
+    <div class="headerbox">
+<h1>Everwild (vray)</h1>
+</div>
+<h2 style="margin-bottom: 100px">2020</h2>
+<p style="margin-bottom: 50px">
+    
+I had the opportunity to work on a now cancelled project from Rare - a stylised trailer for their title everwild.
+<br> </br>
+On this project i worked with creative leads to create assets that kept in-line with the style of the 
+trailer. I created several assets and also worked across scenes to look dev materials and textures.
+<br> </br>
+<p style="margin-bottom: 100px"> Tools used: 3ds max / Maya / Substance / Photoshop
+<br> </br>
+My role: Layout / Asset creation / Scene & look dev 
+</p>
+
+
+
+<div class="project-images" >
+
+<iframe width="900" height="500" src="https://youtu.be/WSWnnQMSPjc?si=SXK47hnsjhJ9JTRi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/everwild/vray/everwild_vray_01.png"></div>
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/everwild/vray/everwild_vray_02.png"></div>
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/everwild/vray/everwild_vray_03.png"></div>
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/everwild/vray/everwild_vray_04.png"></div>
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/everwild/vray/everwild_vray_05.png"></div>
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/everwild/vray/everwild_vray_06.png"></div>
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/everwild/vray/everwild_vray_07.png"></div>
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/everwild/vray/everwild_vray_08.png"></div>
+
+
+</div>
+</main>
+
+<div class="image-viewer" id="viewer" onclick="closeViewer()">
+<div class="viewer-close">Close</div>
+<img>
+</div>
+
+<script>
+    function openImage(el){
+ const viewer=document.getElementById('viewer')
+ const img=viewer.querySelector('img')
+ img.src=el.querySelector('img').src
+ viewer.style.display='flex'
+}
+
+function closeViewer(){
+ document.getElementById('viewer').style.display='none'
+}
+
+</script>
+
+</body>
+</html>

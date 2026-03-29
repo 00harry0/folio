@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="assets/css/main.css" />
+
+<title>Everwild (ue)</title>
+<link rel="icon" type="image/x-icon" href="https://harryb.art/images/Hbfav.ico">
+
+</head>
+<body>
+    
+<div class="project-back">
+<a href="https://harryb.art/">
+< Home
+</a>
+</div>
+
+<main>
+    <div class="headerbox">
+<h1>Everwild (ue)</h1>
+</div>
+<h2 style="margin-bottom: 100px">2019</h2>
+<p style="margin-bottom: 50px">
+    
+I had the opportunity to work on a now cancelled project from Rare - an in-engine pre re-rendered trailer for the Everwild game.
+<br> </br>
+Our process required us to extract assets from Rares Perforce repository. These assets are then adapted for our production 
+pipeline, including modifying props and re-rigging characters to support our animation workflows before ultimately being 
+reintegrated into Rare’s version of Unreal Engine.
+<br> </br>
+We would take those assets and start blocking out previs scenes in Maya, using temporary assets to establish timing, 
+composition, and staging. The project then transitions into Unreal, where we develop the next stage of previs and lock 
+final cameras and edits using Sequencer.
+<br> </br>
+From there, we move into environment scene development and look development, creating custom environments, modifying props, 
+and building bespoke VFX to support the cinematic tone of each scene. Final shots are lit and rendered in Unreal, where we
+relax real-time optimisation constraints and refine post-processing and lighting to achieve striking, high-impact
+visuals suitable for cinematic delivery.
+<br> </br>
+<p style="margin-bottom: 100px"> Tools used: Unreal Engine 4 / Maya / Photoshop
+<br> </br>
+My role: Layout / Setup / Previs / Lighting / Scene & look dev / Final frame rendering
+</p>
+
+
+
+<div class="project-images" >
+
+<iframe width="900" height="500" src="https://youtu.be/jWpcUH-tKEU?si=RWV89gNl3hJmmz9D" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/everwild/unreal/Shot_010.0381.png"></div>
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/everwild/unreal/Shot_030.0212.png"></div>
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/everwild/unreal/Shot_040.0074.png"></div>
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/everwild/unreal/Shot_050.0265.png"></div>
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/everwild/unreal/Shot_070.0101.png"></div>
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/everwild/unreal/Shot_080.0120.png"></div>
+
+</div>
+</main>
+
+<div class="image-viewer" id="viewer" onclick="closeViewer()">
+<div class="viewer-close">Close</div>
+<img>
+</div>
+
+<script>
+    function openImage(el){
+ const viewer=document.getElementById('viewer')
+ const img=viewer.querySelector('img')
+ img.src=el.querySelector('img').src
+ viewer.style.display='flex'
+}
+
+function closeViewer(){
+ document.getElementById('viewer').style.display='none'
+}
+
+</script>
+
+</body>
+</html>
