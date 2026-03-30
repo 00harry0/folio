@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="assets/css/main.css" />
+
+<title>Outriders</title>
+<link rel="icon" type="image/x-icon" href="https://harryb.art/images/Hbfav.ico">
+
+</head>
+<body>
+    
+<div class="project-back">
+<a href="https://harryb.art/">
+< Home
+</a>
+</div>
+
+<main>
+    <div class="headerbox">
+<h1>Outriders</h1>
+</div>
+<h2 style="margin-bottom: 100px">2019</h2>
+<p style="margin-bottom: 50px">
+    
+In 2019 i worked on an opening cinematic for the title outriders from People Can Fly.
+<br> </br>
+On this project i worked with a team of artists to create assets / scene & look dev / lighting - taking the project from
+previs to final frames.<br> </br>
+
+<p style="margin-bottom: 100px"> Tools used: Unreal Engine 4 / Maya / Photoshop
+<br> </br>
+My role: lighting / Asset creation / Scene & look dev / Rendering
+</p>
+
+
+
+<div class="project-images" >
+
+<iframe width="900" height="500" src="https://www.youtube.com/embed/VMbJ1tVAvIA?si=So-SNlI3HffPDQYR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/outriders/outriders-cine-01.png"></div>
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/outriders/outriders-cine-02.png"></div>
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/outriders/outriders-cine-03.png"></div>
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/outriders/outriders-cine-04.png"></div>
+
+
+
+</div>
+</main>
+
+<div class="image-viewer" id="viewer" onclick="closeViewer()">
+<div class="viewer-close">Close</div>
+<img>
+</div>
+
+<script>
+    function openImage(el){
+ const viewer=document.getElementById('viewer')
+ const img=viewer.querySelector('img')
+ img.src=el.querySelector('img').src
+ viewer.style.display='flex'
+}
+
+function closeViewer(){
+ document.getElementById('viewer').style.display='none'
+}
+
+</script>
+
+</body>
+</html>
