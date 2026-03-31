@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="assets/css/main.css" />
+
+<title>UE4 Env</title>
+<link rel="icon" type="image/x-icon" href="https://harryb.art/images/Hbfav.ico">
+
+</head>
+<body>
+    
+<div class="project-back">
+<a href="https://harryb.art/">
+< Home
+</a>
+</div>
+
+<main>
+    <div class="headerbox">
+<h1>Unreal Alley</h1>
+</div>
+<h2 style="margin-bottom: 100px">2022</h2>
+<p style="margin-bottom: 50px">
+Following a commercial project that required substantial landcscape texturing i wanted to spend some time applying those skills
+to a personal project - this was the "first" time since starting in the industry that id had time to sit down and do some RND.
+<br> </br>
+The environment was fully modelled and textured by me using 3ds Max and Substance, with a number of Megascans assets 
+incorporated to help dress the scene and add additional detail. The project served as a test bed for material work and the focus
+was mostly on the ground at the centre of the scene.
+<br> </br>
+<p style="margin-bottom: 100px"> Tools used: Unreal Engine 5 / 3ds max / Substance / Photoshop
+<br> </br>
+My role: Asset creation / Lighting 
+</p>
+
+
+<div class="project-images" >
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/personal/hb-alley-01.jpg"></div>
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/personal/hb-alley-ref-01.jpg"></div>
+
+
+
+</div>
+</main>
+
+<div class="image-viewer" id="viewer" onclick="closeViewer()">
+<div class="viewer-close">Close</div>
+<img>
+</div>
+
+<script>
+    function openImage(el){
+ const viewer=document.getElementById('viewer')
+ const img=viewer.querySelector('img')
+ img.src=el.querySelector('img').src
+ viewer.style.display='flex'
+}
+
+function closeViewer(){
+ document.getElementById('viewer').style.display='none'
+}
+
+</script>
+
+</body>
+</html>
