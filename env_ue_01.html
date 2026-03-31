@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="assets/css/main.css" />
+
+<title>UE5 Env</title>
+<link rel="icon" type="image/x-icon" href="https://harryb.art/images/Hbfav.ico">
+
+</head>
+<body>
+    
+<div class="project-back">
+<a href="https://harryb.art/">
+< Home
+</a>
+</div>
+
+<main>
+    <div class="headerbox">
+<h1>Unreal Bookstore</h1>
+</div>
+<h2 style="margin-bottom: 100px">2022</h2>
+<p style="margin-bottom: 50px">
+Following the release of Unreal Engine 5.0 in 2022, I wanted to spend some time exploring new
+system features. Over the course of a break I created a small test environment in Unreal Engine 
+to experiment with the lighting workflow and evaluate how Lumen handled indirect lighting, reflections, and scene mood in real time.
+<br> </br>
+The environment was fully modelled and textured by me using Maya and Substance, with a small number of Megascans assets 
+incorporated to help dress the scene and add additional detail. The project served as a focused lighting and environment test, 
+allowing me to explore the practical benefits of Unreal Engine 5’s real-time global illumination compared to previous lighting workflows.
+<br> </br>
+<p style="margin-bottom: 100px"> Tools used: Unreal Engine 5 / Maya / Zbrush / Substance / Photoshop
+<br> </br>
+My role: Asset creation / Lighting 
+</p>
+
+
+
+
+<div class="project-images-non" >
+<div class="aspect-non" onclick="openImage(this)"><img src="images/personal/harry-barnes-hb-book-store-001.jpg"></div>
+
+</div>
+
+<div class="project-images" >
+<div class="aspect-16-9" onclick="openImage(this)"><img src="https://harryb.art/images/personal/harry-barnes-hb-book-store-001_ref.jpg"></div>
+
+
+
+</div>
+</main>
+
+<div class="image-viewer" id="viewer" onclick="closeViewer()">
+<div class="viewer-close">Close</div>
+<img>
+</div>
+
+<script>
+    function openImage(el){
+ const viewer=document.getElementById('viewer')
+ const img=viewer.querySelector('img')
+ img.src=el.querySelector('img').src
+ viewer.style.display='flex'
+}
+
+function closeViewer(){
+ document.getElementById('viewer').style.display='none'
+}
+
+</script>
+
+</body>
+</html>
